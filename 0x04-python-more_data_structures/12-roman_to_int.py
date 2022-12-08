@@ -1,14 +1,28 @@
 #!/usr/bin/python3
+# 12-roman_to_int.py
+
+
 def roman_to_int(roman_string):
-    if roman_string and type(roman_string) == str:
-       rn = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
-       nun_rn = [s for s in roman_string]
-       res = 0
-       l = len(nun_rn)
-       for i in range(l):
-           if i < l - 1 and rn.get(nun_rn[i]) < rn.get(nun_rn[i + 1]):
-               res -= rn.get(nun_rn[i])
-           else:
-               res += rn.get(nun_rn[i])
-        return (res)
-    return (0)
+    if (roman_string is None) or (type(roman_string) != str):
+        return 0
+
+    result = 0
+    vals = {
+        'I': 1,
+        'V': 5,
+        'X': 10,
+        'L': 50,
+        'C': 100,
+        'D': 500,
+        'M': 1000
+    }
+
+    limit = len(roman_string)
+    for ch in range(0, limit):
+        if ch == len(roman_string) - 1:
+            result += vals[roman_string[ch]]
+        elif vals[roman_string[ch]] >= vals[roman_string[ch + 1]]:
+            result += vals[roman_string[ch]]
+        else:
+            result -= vals[roman_string[ch]]
+    return result
